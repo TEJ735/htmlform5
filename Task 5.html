@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+	<style>
+	* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic Styling */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2rem;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+header nav ul li {
+    margin: 0 1rem;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.section {
+    padding: 2rem;
+    text-align: center;
+}
+
+.projects-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.project {
+    width: 300px;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+input, textarea, button {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .projects-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Task list styling */
+#task-list {
+    list-style-type: none;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.task-item button {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 0.3rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.task-item button:hover {
+    background-color: darkred;
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.filters select, .filters input {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.product-card {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.product-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-card p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.product-price {
+    font-weight: bold;
+    color: #333;
+}
+	</style>
+</head>
+<body>
+    <header>
+        <h1>My Portfolio</h1>
+        <nav>
+            <ul>
+                <li><a href="#
+				">About</a></li>
+				 <li><a href="#products">Products</a></li>
+				<li><a href="#toDoList">To-Do-List</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="about" class="section">
+        <h2>About Me</h2>
+        <p>Hello! I'm a passionate developer with experience in HTML, CSS, and JavaScript. I love building clean and responsive websites.</p>
+    </section>
+<section id="products" class="section">
+      <div class="container">
+        <h1>Product Listing</h1>
+        
+        <!-- Filter and Sort Options -->
+        <div class="filters">
+            <select id="category-filter">
+                <option value="all">All Categories</option>
+                <option value="electronics">Electronics</option>
+                <option value="clothing">Clothing</option>
+                <option value="accessories">Accessories</option>
+            </select>
+            
+            <select id="price-sort">
+                <option value="default">Sort by Price</option>
+                <option value="asc">Low to High</option>
+                <option value="desc">High to Low</option>
+            </select>
+            
+            <input type="range" id="price-filter" min="0" max="1000" value="1000">
+            <span id="price-range">Up to $1000</span>
+        </div>
+
+        <!-- Product List -->
+        <div id="product-list" class="product-list"></div>
+    </div>
+ </section>
+	   <section id="toDoList" class="section">
+	<div class="container">
+        <h1>To-Do List</h1>
+        <form id="task-form">
+            <input type="text" id="task-input" placeholder="Enter a new task" required>
+            <button type="submit">Add Task</button>
+        </form>
+        <ul id="task-list"></ul>
+    </div>
+	 </section>
+
+    <section id="contact" class="section">
+        <h2>Contact Me</h2>
+        <form id="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+        <p id="response-message"></p>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+<script>
+document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    // Form submission logic
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+    
+    // Simulate form submission success
+    document.getElementById("response-message").textContent = `Thank you, ${name}! Your message has been sent.`;
+    
+    // Clear the form
+    document.getElementById("contact-form").reset();
+});
+
+
+// Select elements
+const taskForm = document.getElementById("task-form");
+const taskInput = document.getElementById("task-input");
+const taskList = document.getElementById("task-list");
+
+// Load tasks from local storage
+document.addEventListener("DOMContentLoaded", loadTasks);
+
+// Add new task
+taskForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const taskText = taskInput.value.trim();
+    if (taskText) {
+        addTask(taskText);
+        saveTask(taskText);
+        taskInput.value = "";
+    }
+});
+
+// Function to create task element
+function addTask(taskText) {
+    const li = document.createElement("li");
+    li.classList.add("task-item");
+    li.textContent = taskText;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", function () {
+        removeTask(li, taskText);
+    });
+
+    li.appendChild(deleteButton);
+    taskList.appendChild(li);
+}
+
+// Save task to local storage
+function saveTask(taskText) {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.push(taskText);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+// Load tasks from local storage
+function loadTasks() {
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.forEach(task => addTask(task));
+}
+
+// Remove task from local storage and UI
+function removeTask(taskElement, taskText) {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks = tasks.filter(task => task !== taskText);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    taskList.removeChild(taskElement);
+}
+
+
+// Sample product data
+const products = [
+    { id: 1, name: 'Smartphone', category: 'electronics', price: 600 },
+    { id: 2, name: 'Laptop', category: 'electronics', price: 1200 },
+    { id: 3, name: 'Headphones', category: 'accessories', price: 150 },
+    { id: 4, name: 'Jacket', category: 'clothing', price: 80 },
+    { id: 5, name: 'Sneakers', category: 'clothing', price: 120 },
+    { id: 6, name: 'Watch', category: 'accessories', price: 250 },
+    { id: 7, name: 'Tablet', category: 'electronics', price: 400 },
+    { id: 8, name: 'Sunglasses', category: 'accessories', price: 75 }
+];
+
+// DOM Elements
+const productList = document.getElementById("product-list");
+const categoryFilter = document.getElementById("category-filter");
+const priceSort = document.getElementById("price-sort");
+const priceFilter = document.getElementById("price-filter");
+const priceRange = document.getElementById("price-range");
+
+function displayProducts(products) {
+    productList.innerHTML = ""; // Clear the list
+    products.forEach(product => {
+        const productCard = document.createElement("div");
+        productCard.classList.add("product-card");
+        productCard.innerHTML = `
+            <h2>${product.name}</h2>
+            <p>Category: ${product.category}</p>
+            <p class="product-price">$${product.price}</p>
+        `;
+        productList.appendChild(productCard);
+    });
+}
+
+// Filter products by category
+function filterByCategory(products, category) {
+    return category === "all" ? products : products.filter(product => product.category === category);
+}
+
+// Filter products by price
+function filterByPrice(products, maxPrice) {
+    return products.filter(product => product.price <= maxPrice);
+}
+
+// Sort products by price
+function sortProducts(products, sortOrder) {
+    return products.slice().sort((a, b) => {
+        return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+    });
+}
+
+// Update product list based on filters and sorting
+function updateProductList() {
+    let filteredProducts = filterByCategory(products, categoryFilter.value);
+    filteredProducts = filterByPrice(filteredProducts, priceFilter.value);
+    
+    if (priceSort.value !== "default") {
+        filteredProducts = sortProducts(filteredProducts, priceSort.value);
+    }
+    
+    displayProducts(filteredProducts);
+}
+
+// Event Listeners
+categoryFilter.addEventListener("change", updateProductList);
+priceSort.addEventListener("change", updateProductList);
+priceFilter.addEventListener("input", () => {
+    priceRange.textContent = `Up to $${priceFilter.value}`;
+    updateProductList();
+});
+
+// Initial Display
+displayProducts(products);
+</script>
+</html>
